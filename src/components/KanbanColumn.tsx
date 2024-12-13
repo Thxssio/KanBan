@@ -8,9 +8,10 @@ interface Props {
   onDragStart: (cardId: string, columnId: string) => void;
   onDragOver: (e: React.DragEvent) => void;
   onDrop: () => void;
+  onAddTask: (columnId: string, cardId: string) => void;
 }
 
-const KanbanColumn: React.FC<Props> = ({ column, onDragStart, onDragOver, onDrop }) => {
+const KanbanColumn: React.FC<Props> = ({ column, onDragStart, onDragOver, onDrop, onAddTask }) => {
   return (
     <div
       className="flex-shrink-0 w-80 bg-gray-100 rounded-lg shadow-sm"
@@ -23,7 +24,7 @@ const KanbanColumn: React.FC<Props> = ({ column, onDragStart, onDragOver, onDrop
           <span className="text-sm text-gray-500">{column.cards.length}</span>
         </div>
       </div>
-      
+
       <div className="p-4 space-y-3">
         {column.cards.map((card) => (
           <KanbanCard
@@ -32,8 +33,11 @@ const KanbanColumn: React.FC<Props> = ({ column, onDragStart, onDragOver, onDrop
             onDragStart={() => onDragStart(card.id, column.id)}
           />
         ))}
-        
-        <button className="w-full py-2 flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-200 rounded-lg transition-colors">
+
+        <button
+          className="w-full py-2 flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-200 rounded-lg transition-colors"
+          onClick={() => onAddTask(column.id, '')} 
+        >
           <Plus size={20} />
           Add Card
         </button>

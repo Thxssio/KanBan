@@ -23,7 +23,7 @@ export const moveCard = (
     if (col.id === targetColumnId) {
       return {
         ...col,
-        cards: [...col.cards, card],
+        cards: [...col.cards, { ...card }], 
       };
     }
     return col;

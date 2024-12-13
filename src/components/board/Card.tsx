@@ -13,8 +13,8 @@ interface Props {
 export const Card: React.FC<Props> = ({ 
   card, 
   onDragStart, 
-  onTouchMove,
-  isMobile,
+  onTouchMove, 
+  isMobile, 
   columnId 
 }) => {
   const [showActions, setShowActions] = useState(false);

@@ -1,7 +1,5 @@
-import React from 'react';
-import { Column as ColumnType } from '../../types';
-import { Card } from './Card';
 import { Button } from '../ui/Button';
+import { Card } from './Card';
 
 interface Props {
   column: ColumnType;
@@ -9,6 +7,7 @@ interface Props {
   onDragOver: (e: React.DragEvent) => void;
   onDrop: () => void;
   onTouchMove: (cardId: string, columnId: string, targetColumnId: string) => void;
+  onAddTask: (columnId: string) => void; // Adicionada prop
   isMobile: boolean;
 }
 
@@ -18,6 +17,7 @@ export const Column: React.FC<Props> = ({
   onDragOver, 
   onDrop,
   onTouchMove,
+  onAddTask, // Nova prop para abrir o modal
   isMobile
 }) => (
   <div
@@ -33,7 +33,13 @@ export const Column: React.FC<Props> = ({
           {column.cards.length}
         </span>
       </div>
-      <Button icon size="sm">Add</Button>
+      <Button 
+        icon 
+        size="sm" 
+        onClick={() => onAddTask(column.id)} // Chama a função para abrir o modal
+      >
+        Add
+      </Button>
     </div>
     
     <div className="p-2 sm:p-3 space-y-2 sm:space-y-3 max-h-[calc(100vh-16rem)] overflow-y-auto">
